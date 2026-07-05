@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Biblioteka Personale e Gertit</title>
+<link rel="icon" href="📚">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:linear-gradient(135deg,#07111f,#0b2038,#123a63);
+    min-height:100vh;
+    color:white;
+}
+
+/* =========================
+HEADER & MENU
+========================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.menu{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:15px;
+    padding:20px;
+}
+
+.menu button{
+    padding:13px 24px;
+    border:none;
+    border-radius:15px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.menu button:hover{
+    background:#00aaff;
+    transform:translateY(-4px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* =========================
+TITLE
+========================= */
+
+.title{
+    text-align:center;
+    font-size:60px;
+    font-weight:bold;
+    margin-top:40px;
+}
+
+.subtitle{
+    text-align:center;
+    margin-top:10px;
+    opacity:0.8;
+    font-size:18px;
+}
+
+/* =========================
+SEARCH
+========================= */
+
+.search-container{
+    display:flex;
+    justify-content:center;
+    margin:40px 20px;
+}
+
+.search-container input{
+    width:550px;
+    max-width:100%;
+    padding:18px;
+    border:none;
+    border-radius:20px;
+    background:rgba(255,255,255,0.08);
+    color:white;
+    font-size:18px;
+    outline:none;
+    backdrop-filter:blur(10px);
+    transition:0.3s;
+}
+
+.search-container input::placeholder{
+    color:#d6d6d6;
+}
+
+.search-container input:focus{
+    transform:scale(1.02);
+    background:rgba(255,255,255,0.12);
+}
+
+/* =========================
+SECTIONS
+========================= */
+
+.section{
+    display:none;
+    padding:40px;
+}
+
+.section.active{
+    display:block;
+}
+
+.section-title{
+    font-size:45px;
+    margin-bottom:35px;
+    color:#7ddcff;
+    text-align:center;
+}
+
+/* =========================
+BOOKS
+========================= */
+
+.books{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.book{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:22px;
+    padding:25px;
+    transition:0.3s;
+    backdrop-filter:blur(10px);
+}
+
+.book:hover{
+    transform:translateY(-8px) scale(1.02);
+    box-shadow:0 15px 30px rgba(0,0,0,0.4);
+}
+
+.book h3{
+    font-size:24px;
+    margin-bottom:12px;
+    color:#ffffff;
+}
+
+.book p{
+    opacity:0.8;
+    font-size:17px;
+}
+
+/* =========================
+LOCATION IMAGE
+========================= */
+
+.location-container{
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
+}
+
+.location-container img{
+    width:90%;
+    max-width:900px;
+    border-radius:25px;
+    border:3px solid rgba(255,255,255,0.1);
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+    .title{
+        font-size:42px;
+    }
+
+    .section-title{
+        font-size:34px;
+    }
+
+    .menu{
+        gap:10px;
+    }
+
+    .menu button{
+        font-size:14px;
+        padding:10px 16px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+MENU
+========================= -->
+
+<header>
+
+    <div class="menu">
+
+        <button onclick="showSection('ndarja1')">Ndarja 1</button>
+        <button onclick="showSection('ndarja2')">Ndarja 2</button>
+        <button onclick="showSection('ndarja3')">Ndarja 3</button>
+        <button onclick="showSection('ndarja4')">Ndarja 4</button>
+        <button onclick="showSection('ndarja5')">Ndarja 5</button>
+        <button onclick="showSection('ndarja6')">Ndarja 6</button>
+        <button onclick="showSection('ndarja7')">Ndarja 7</button>
+        <button onclick="showSection('ndarja8')">Ndarja 8</button>
+
+        <button onclick="showSection('vendodhja')">
+            Vendodhja e çdo ndarjeje
+        </button>
+        <button onclick="showSection('kontakt')">
+            Kontakt
+        </button>
+
+    </div>
+
+</header>
+
+<!-- =========================
+TITLE
+========================= -->
+
+<div class="title">📚 Biblioteka Personale e Gertit</div>
+
+<div class="subtitle">
+Menaxho bibliotekën personale
+</div>
+<div class="subtitle">
+Kujdes kur te kerkoni! Kerkimi behet vetem per ate ndarje!
+</div>
+<div class="subtitle">
+Biblioteka nuk ka perfunduar ende se regjisturari! Ne total jane regjistruar: 245 libra
+</div>
+<div class="subtitle">
+Autorët që kanë shenjën "?", kanë patur vështirësi për t'u lexuar, janë të përkthyera ose arsye tjetër. Nëse doni të dini botimin, autorin etj. mund të na kontaktoni në një nga metodat në sektorin "Na kontakto"
+</div>
+<!-- =========================
+SEARCH BAR
+========================= -->
+
+<div class="search-container">
+
+    <input 
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Kerko titullin ose autorin..."
+    >
+
+</div>
+
+<!-- =========================
+NDARJA 1
+========================= -->
+
+<section class="section active" id="ndarja1">
+
+    <div class="section-title">Ndarja 1</div>
+    <h2>Kjo ndarje ka përfunduar! Në total janë regjistruar në këtë ndarje 43 libra.</h2>
+    <div class="books">
+
+        <!-- 45 LIBRA -->
+
+        <div class="book"><h3>Prilli i thyer</h3><p>Ismail Kadare</p></div>
+        <div class="book"><h3>Koncert ne fund te dimrit</h3><p>Ismail Kadare</p></div>
+        <div class="book"><h3>Ura me tri harqe</h3><p>Ismail Kadare</p></div>
+        <div class="book"><h3>Koha e shkrimeve</h3><p>Ismail Kadare</p></div>
+        <div class="book"><h3>Nje vit i hidhur</h3><p>Teodor Laco</p></div>
+        <div class="book"><h3>Gjakftohtesia</h3><p>Ismail Kadare</p></div>
+        <div class="book"><h3>Balada e Kurbimit</h3><p>Vath Koreshi</p></div>
+        <div class="book"><h3>Veshtrim kriminologjik</h3><p>Jani Papandile</p></div>
+        <div class="book"><h3>Mitologji ne eposin e kreshnikeve</h3><p>Shaban Sinani</p></div>
+        <div class="book"><h3>Dhe nata u nda ne mes</h3><p>Diana Culi</p></div>
+        <div class="book"><h3>Iluzionet e humbura</h3><p>Honore de Balzak</p></div>
+        <div class="book"><h3>Kohe per dashuri</h3><p>Danielle Steel</p></div>
+        <div class="book"><h3>Zonja e panjohur</h3><p>Teodor Drajzer</p></div>
+        <div class="book"><h3>Rembrandti</h3><p>Gledis Shmit</p></div>
+        <div class="book"><h3>Didro</h3><p>?</p></div>
+        <div class="book"><h3>Estetika, jeta, arti</h3><p>Alfred Uci</p></div>
+        <div class="book"><h3>Ishuj ne qiell</h3><p>Artur Klark</p></div>
+        <div class="book"><h3>Ballkani i trazuar dhe shqiptaret</h3><p>Pandeli Cina</p></div>
+        <div class="book"><h3>Belxhiku qe degjon Vence</h3><p>Shevqet Musaraj</p></div>
+        <div class="book"><h3>Poezi te zgjedhura</h3><p>Pablo Neruda</p></div>
+        <div class="book"><h3>Fjalor i filozofise</h3><p>?</p></div>
+        <div class="book"><h3>Udhetim ne vite</h3><p>Odhise Porodini</p></div>
+        <div class="book"><h3>Oret e qytetit te vogel</h3><p>Nasi Lera</p></div>
+        <div class="book"><h3>Libri i madh i endrrave</h3><p>SH.B | GLOB</p></div>
+        <div class="book"><h3>Kapitali | Vellimi i pare</h3><p>K. Marks</p></div>
+        <div class="book"><h3>Tragjedia e nje qyteti</h3><p>?</p></div>
+        <div class="book"><h3>Ti vdekja ime mbushur me jete</h3><p>Mihal Hanxhari</p></div>
+        <div class="book"><h3>Se syte e mi keshtu e shohin boten</h3><p>Mihal Hanxhari</p></div>
+        <div class="book"><h3>Poezi</h3><p>Mikelanxhelo</p></div>
+        <div class="book"><h3>Ushqimet tokesore</h3><p>"Mihal Hanxhari" Andre Gide</p></div>
+        <div class="book"><h3>Sonete</h3><p>Mihal Hanxhari</p></div>
+        <div class="book"><h3>Gitanjali</h3><p>Rabindranath Tagore "Mihal Hanxhari"</p></div>
+        <div class="book"><h3>Lulet e se keqes</h3><p>Mihal Hanxhari</p></div>
+        <div class="book"><h3>Lizika dhe Satiza</h3><p>Kasem Trebeshina</p></div>
+        <div class="book"><h3>Gjaku i prillit</h3><p>Nasi Leka</p></div>
+        <div class="book"><h3>Bokaco 3</h3><p>Dekameroni</p></div>
+        <div class="book"><h3>Bokaco 1</h3><p>Dekameroni</p></div>
+        <div class="book"><h3>Goja e kalit</h3><p>Xhojs Keri</p></div>
+        <div class="book"><h3>Rubicon</h3><p>Tom Holland</p></div>
+        <div class="book"><h3>Boset e dollarit</h3><p>Artur Hejli</p></div>
+        <div class="book"><h3>"Bete 1" Vepra te zgjedhura</h3><p>Bujar Doko</p></div>
+        <div class="book"><h3>"Bete 3" Vepra te zgjedhura</h3><p>Bujar Doko</p></div>
+        <div class="book"><h3>"Bete 4" Vepra te zgjedhura</h3><p>Bujar Doko</p></div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+NDARJA 2-8
+KOPJO STRUKTUREN
+========================= -->
+
+<section class="section" id="ndarja2">
+
+    <div class="section-title">Ndarja 2</div>
+    <h2>Kjo ndarje ka përfunduar! Në total janë regjistruar në këtë ndarje 49 libra.</h2>
+    <div class="books">
+
+        <div class="book"><h3>Nje mije e nje net</h3><p>Dorina Paco</p></div>
+        <div class="book"><h3>Gjurme te mjeksise shqiptare "6"</h3><p>Flamur Tartari</p></div>
+        <div class="book"><h3>Gjeneral Thoma Xhixho</h3><p>Bernard Zotaj</p></div>
+        <div class="book"><h3>Per lirine dhe dinjitetin e njeriut</h3><p>Eleanor Rusvelt</p></div>
+        <div class="book"><h3>Kenge ruse</h3><p>Miltiadh Bode</p></div>
+        <div class="book"><h3>Aventurat e pikes se ujit</h3><p>Ina Petritaj</p></div>
+        <div class="book"><h3>Aventurat e Tom Sojerit</h3><p>Mark Tuen</p></div>
+        <div class="book"><h3>Ketu nis mencuria</h3><p>Aferdita Avdiko</p></div>
+        <div class="book"><h3>Lexojme bukur</h3><p>Aferdita Avdiko</p></div>
+        <div class="book"><h3>Pinoku</h3><p>Karlo Kolodi</p></div>
+        <div class="book"><h3>Qortimet e pyllit</h3><p>Dorina Minxuri</p></div>
+        <div class="book"><h3>Legjenda e tregime te mocme shqiptare</h3><p>Anton Papleka</p></div>
+        <div class="book"><h3>Fabula te zgjedhura</h3><p>La Fonten</p></div>
+        <div class="book"><h3>Qortimet e ujit</h3><p>Dorina Minxuri</p></div>
+        <div class="book"><h3>Shkolla e pyllit</h3><p>Aferdita Avdiiko</p></div>
+        <div class="book"><h3>Burimi i dijes</h3><p>Aferdita Avdiko</p></div>
+        <div class="book"><h3>Macoku, gjeli e dhelpra</h3><p>Vladimir Ndini</p></div>
+        <div class="book"><h3>Perrala per sot dhe per neser</h3><p>Gaqo Bushaka</p></div>
+        <div class="book"><h3>Perrallat e nenes Toke</h3><p>Bahir Avdiko</p></div>
+        <div class="book"><h3>Na ishte njehere... "Botimi i vjeter!"</h3><p>Vellezerit Grimm</p></div>
+        <div class="book"><h3>Na ishte njehere... "Botimi i ri!"</h3><p>Vellezerit Grimm</p></div>
+        <div class="book"><h3>Histori gazmore nga shkolla</h3><p>Vladimir Ndini</p></div>
+        <div class="book"><h3>Lexojme pas abetares</h3><p>Aferdita Avdiko</p></div>
+        <div class="book"><h3>Piktori i vogel i mrekullive</h3><p>Aferdita Avdiko</p></div>
+        <div class="book"><h3>Makroekonomia</h3><p>Rudiger Dornbusch dhe Stanley Fischer</p></div>
+        <div class="book"><h3>Manaxhimi (Teste, ushtrime etj.)</h3><p>Shyqyri Laci</p></div>
+        <div class="book"><h3>Manaxhimi</h3><p>Shyqyri Laci</p></div>
+        <div class="book"><h3>Matematika financiare</h3><p>Omer Stringa</p></div>
+        <div class="book"><h3>Finance | Ushtrime</h3><p>Sherif Bundo etj.</p></div>
+        <div class="book"><h3>Finance</h3><p>Sherif Bundo</p></div>
+        <div class="book"><h3>Mikroekonomia</h3><p>Hal R. Varian</p></div>
+        <div class="book"><h3>Prescription Drugs</h3><p>?</p></div>
+        <div class="book"><h3>Trendafilat e kuq te vjeshtes</h3><p>Anesti Bukuroshi</p></div>
+        <div class="book"><h3>Sketches and short stories</h3><p>Monda Bulka</p></div>
+        <div class="book"><h3>Sekreti</h3><p>Rhonda Byrne</p></div>
+        <div class="book"><h3>Nje gjurme tjeter</h3><p>?</p></div>
+        <div class="book"><h3>Enigma e nje vrasje</h3><p>Stefan Mur</p></div>
+        <div class="book"><h3>Born at the wrong time</h3><p>Cyril James</p></div>
+        <div class="book"><h3>Kurban</h3><p>Edi Rama</p></div>
+        <div class="book"><h3>Obelisku i zi</h3><p>Erlin Maria</p></div>
+        <div class="book"><h3>Te duash njeriun tend</h3><p>Besa</p></div>
+        <div class="book"><h3>Novela 1</h3><p>Stefan Cvojg</p></div>
+        <div class="book"><h3>Kopshti sekret</h3><p>Frances H.Burnett</p></div>
+        <div class="book"><h3>Frika e fluturimit</h3><p>Erica Jongs</p></div>
+
+        <div class="book"><h3>Fundamentals of Engineering</h3><p>Merle C.Potter PhD. PE</p></div>
+        <div class="book"><h3>Si te gatuajme (Botimi i ri)</h3><p>Evgjeni Harizi</p></div>
+        <div class="book"><h3>Si te gatuajme (Botimi i vjeter)</h3><p>Evgjeni Harizi</p></div>
+        <div class="book"><h3>Nese nuk shuan shkendiat, s'ke shuar zjarrin</h3><p>Leon Tolstoy</p></div>
+        <div class="book"><h3>20.000 lega nen det</h3><p>Zhyl Vern</p></div>
+    </div>
+
+</section>
+
+<section class="section" id="ndarja3">
+    <div class="section-title">Ndarja 3</div>
+    <h2>Kjo ndarje ka përfunduar! Në total janë regjistruar në këtë ndarje 65 libra.</h2>
+    <div class="books">
+        <div class="book"><h3>Buletini i bores</h3><p>Zija Cela</p></div>
+        <div class="book"><h3>Erdhi dite e Arberit</h3><p>?</p></div>
+        <div class="book"><h3>Aventurat e Tom Sojerit</h3><p>Mark Tuein</p></div>
+        <div class="book"><h3>Buzeqeshja e femijeve</h3><p>Leon N. Tolstoi</p></div>
+        <div class="book"><h3>Imoraliteti i shtypit</h3><p>Mark Tuein</p></div>
+        <div class="book"><h3>Une kapercej pellgjet</h3><p>Alan Marshall</p></div>
+        <div class="book"><h3>Udheve te femijerise</h3><p>Ramadan Pasmaciu</p></div>
+        <div class="book"><h3>412 Anekdota per Nastradinin</h3><p>Uegea</p></div>
+        <div class="book"><h3>S'duhet te jete keshtu</h3><p>Xhejn Uollsh</p></div>
+        <div class="book"><h3>Djaloshi trim</h3><p>Isuf Nelaj</p></div>
+        <div class="book"><h3>Ekspedita e kalter</h3><p>Bardhyl Xhamo</p></div>
+        <div class="book"><h3>Pune shkronjash</h3><p>Kolec Pepa</p></div>
+        <div class="book"><h3>Zbuluesit e vegjel</h3><p>Fatmir Dibra</p></div>
+        <div class="book"><h3>Duke kerkuar yjet</h3><p>Aqif Malaj</p></div>
+        <div class="book"><h3>Rob Roy</h3><p>Walter Scott</p></div>
+        <div class="book"><h3>Pa mua, rrethi nget vend</h3><p>Guro Zeneli</p></div>
+        <div class="book"><h3>Nje ndodhi ne det</h3><p>Arian Kadiu</p></div>
+        <div class="book"><h3>E fshehta e kalasa</h3><p>Ferhat Cakerri</p></div>
+        <div class="book"><h3>Bora e marsit</h3><p>Valter File</p></div>
+        <div class="book"><h3>Guri qe thyen cekane</h3><p>Gjike Kurtiqi</p></div>
+        <div class="book"><h3>Egjerushi</h3><p>Cezare Petresku</p></div>
+        <div class="book"><h3>Llamba e djegur</h3><p>Muharrem Topi</p></div>
+        <div class="book"><h3>Neper koridoret e thella te Jonit</h3><p>Bedri Dedja</p></div>
+        <div class="book"><h3>Gjergj Elez Alia</h3><p>Rushit Ramabaja</p></div>
+        <div class="book"><h3>Drejt qiellit me furtune</h3><p>Ajven Sautholl</p></div>
+        <div class="book"><h3>E fshehta pas horizontit</h3><p>Zhan Pien Andrevon</p></div>
+        <div class="book"><h3>Vjen nje njeri</h3><p>Idriz Ponari</p></div>
+        <div class="book"><h3>Lahuta e malesise</h3><p>Odhise Grillo</p></div>
+        <div class="book"><h3>Kapiten Mihali</h3><p>Nikos Kzanzaqis</p></div>
+        <div class="book"><h3>Deborat e kilimanxharos</h3><p>Ernest Heminguej</p></div>
+        <div class="book"><h3>Lekura e Shagrenit</h3><p>Honore de Balzak</p></div>
+        <div class="book"><h3>Zhberja e ikjes</h3><p>Vilson Culaj</p></div>
+        <div class="book"><h3>Metamorfoza</h3><p>?</p></div>
+        <div class="book"><h3>Short Stories</h3><p>Dritero Agolli</p></div>
+        <div class="book"><h3>550 Receta te mjeksise popullore</h3><p>Hysen Vogli etj.</p></div>
+        <div class="book"><h3>E diel pas vdekjes</h3><p>Dhimiter Xhurani</p></div>
+        <div class="book"><h3>Njeriu pa emer</h3><p>Niko Nikolla</p></div>
+        <div class="book"><h3>Njeriu qe qesh</h3><p>Y. Hygo</p></div>
+        <div class="book"><h3>Enderr Dashurie</h3><p>Rexhina Gjordeni</p></div>
+        <div class="book"><h3>Me shume se zdrukethar</h3><p>?</p></div>
+        <div class="book"><h3>Vrite mendjen!</h3><p>Xhosh Mekdouell etj.</p></div>
+        <div class="book"><h3>Biri i shtepise se Davidit</h3><p>?</p></div>
+        <div class="book"><h3>Qe prangat te keputen</h3><p>Snerzhin Snauxh</p></div>
+        <div class="book"><h3>Besimi per te jetuar</h3><p>Derek Prince</p></div>
+        <div class="book"><h3>Dashuri ekstravagante</h3><p>Derek Prince</p></div>
+        <div class="book"><h3>Rrefim per tre mbreter</h3><p>Gene Edwards</p></div>
+        <div class="book"><h3>Bazat e Krishterimit</h3><p>Xhon Shtot</p></div>
+        <div class="book"><h3>Beginning with Christ</h3><p>H. L. H. Hejikoop</p></div>
+        <div class="book"><h3>Pas Jezusit</h3><p>Gunter Krallmann</p></div>
+        <div class="book"><h3>Te harruarit</h3><p>?</p></div>
+        <div class="book"><h3>Perralla kineze</h3><p>Miltiadh Bode</p></div>
+        <div class="book"><h3>Lufta per zjarrin</h3><p>Zh. A. Roni</p></div>
+        <div class="book"><h3>Bardhesi</h3><p>Jordan Haxhinikolla</p></div>
+        <div class="book"><h3>Barii, Biri i kazanit</h3><p>Xhejms Oliver Kerud</p></div>
+        <div class="book"><h3>Ne gjurmet e heroit</h3><p>Ndoc Papleka</p></div>
+        <div class="book"><h3>The tempest</h3><p>?</p></div>
+        <div class="book"><h3>Hamlet</h3><p>?</p></div>
+        <div class="book"><h3>Otilello</h3><p>?</p></div>
+        <div class="book"><h3>Tregime e novela</h3><p>Gi de Mopasan</p></div>
+        <div class="book"><h3>Manual i matematikes</h3><p>.....</p></div>
+        <div class="book"><h3>Te ushqehemi drejt sipas grupeve te gjakut</h3><p>Peter J. D'Adamo</p></div>
+        <div class="book"><h3>Nje dite dhe nje jete</h3><p>Teodor Laci</p></div>
+        <div class="book"><h3>Gora</h3><p>Rabindranat Tagora</p></div>
+        <div class="book"><h3>Shqiperia</h3><p>Ben Blushi</p></div>
+        <div class="book"><h3>Kodi i Dan Vincit</h3><p>Dan Brown</p></div>
+    </div>
+</section>
+
+<section class="section" id="ndarja4">
+    <div class="section-title">Ndarja 4</div>
+    <h2>Kjo ndarje ka përfunduar! Në total janë regjistruar në këtë ndarje 47 libra.</h2>
+    <div class="books">
+        <div class="book"><h3>Fjalor i gjuhes se sotme Shqipe</h3><p>?</p></div>
+        <div class="book"><h3>Fjalori enciklopedik Shqiptar</h3><p>?</p></div>
+        <div class="book"><h3>Fjalor Anglisht-Shqip</h3><p>?</p></div>
+        <div class="book"><h3>English Grammar, for Dummies</h3><p>?</p></div>
+        <div class="book"><h3>Essential English 3</h3><p>?</p></div>
+        <div class="book"><h3>Le Nouveau sans frontiers 3</h3><p>?</p></div>
+        <div class="book"><h3>Le Nouveau sans frontiers 3, Cahier d'exercices</h3><p>?</p></div>
+        <div class="book"><h3>Le Nouveau sans frontiers 2</h3><p>?</p></div>
+        <div class="book"><h3>Le Nouveau sans frontiers 2, Cahier d'exercices</h3><p>?</p></div>
+        <div class="book"><h3>Poetry review | View from a bridge</h3><p>?</p></div>
+        <div class="book"><h3>Le Francais 1</h3><p>?</p></div>
+        <div class="book"><h3>Italiano 4</h3><p>?</p></div>
+        <div class="book"><h3>Italiano 3</h3><p>?</p></div>
+        <div class="book"><h3>Italiano 2</h3><p>?</p></div>
+        <div class="book"><h3>Italiano 1</h3><p>?</p></div>
+        <div class="book"><h3>Deutsch Direkt!</h3><p>?</p></div>
+        <div class="book"><h3>Spiritual Leadership</h3><p>J. Oswald Sanders</p></div>
+        <div class="book"><h3>Northouse Leadership | 60th Edition</h3><p>?</p></div>
+        <div class="book"><h3>Lereni te lire detin!</h3><p>Lindita Mamli</p></div>
+        <div class="book"><h3>Etje per realitet</h3><p>Xhorxh Verhuer</p></div>
+        <div class="book"><h3>My heart will go on singing</h3><p>N. A. Woychuk</p></div>
+        <div class="book"><h3>Drejt drites</h3><p>Stiven Masud</p></div>
+        <div class="book"><h3>Guidelines for the host organization</h3><p>"Shtepia Botuese: USAID AL"</p></div>
+        <div class="book"><h3>The challenge of missions</h3><p>Oswald J. Smith</p></div>
+        <div class="book"><h3>The English gentleman</h3><p>Douclas Sutherland</p></div>
+        <div class="book"><h3>Ishulli i thesarit</h3><p>Stivenson</p></div>
+        <div class="book"><h3>Djemte e rruges Pal</h3><p>Ferenc Molnar/p></div>
+        <div class="book"><h3>Piter Pan</h3><p>James Matthew Barrie</p></div>
+        <div class="book"><h3>Keshtu foli Zarathustra</h3><p>Friedrich Nietzsche</p></div>
+        <div class="book"><h3>Lexoma shpirtin</h3><p>Anila Boshnjaku</p></div>
+        <div class="book"><h3>Bimet mjekesore & aromatike Shqiptare</h3><p>EPCA</p></div>
+        <div class="book"><h3>Lexikoni i shkrimtareve shqiptare per femije</h3><p>Odhise Grillo</p></div>
+        <div class="book"><h3>Kur lexojme Odhisene</h3><p>Milaim Nelaj</p></div>
+        <div class="book"><h3>World cultures: England</h3><p>Teach Yourself</p></div>
+        <div class="book"><h3>World cultures: Italy</h3><p>Teach Yourself</p></div>
+        <div class="book"><h3>What's so amazing about Grace?</h3><p>Yancey</p></div>
+        <div class="book"><h3>Habia Filozofike</h3><p>Zhane Hersh</p></div>
+        <div class="book"><h3>Charlotte's Web Page</h3><p>Alan Trussell-Cullen</p></div>
+        <div class="book"><h3>Rrumpalla</h3><p>Peter Lucas</p></div>
+        <div class="book"><h3>Worship</h3><p>Graham Kendrick</p></div>
+        <div class="book"><h3>Aspects of the corrective constrative grammar</h3><p>Jani Panolli</p></div>
+        <div class="book"><h3>Etnokultura shqiptare</h3><p>Mark Tirta</p></div>
+        <div class="book"><h3>Vizioni mesimor; Kultura e te nxenit. Seria 4</h3><p>Mark Vuji</p></div>
+        <div class="book"><h3>Afraid no more!</h3><p>H.Norman Vright</p></div>
+        <div class="book"><h3>I ngujuari dhe hija</h3><p>Gjergj Vlashi</p></div>
+        <div class="book"><h3>I ngujuari dhe hija</h3><p>Gjergj Vlashi</p></div>
+        <div class="book"><h3>Njeriu u neteve te vjeshtes</h3><p>Gjergj Vlashi</p></div>
+        <div class="book"><h3>Netet e nje qyteti</h3><p>Gjergj Vlashi</p></div>
+    </div>
+</section>
+
+<section class="section" id="ndarja5">
+    <div class="section-title">Ndarja 5</div>
+    <h2>Kjo ndarje është në proces!</h2>
+    <div class="books">
+        
+    </div>
+</section>
+
+<section class="section" id="ndarja6">
+    <div class="section-title">Ndarja 6</div>
+    <h2>Kjo ndarje është në proces!</h2>
+    <div class="books"></div>
+</section>
+
+<section class="section" id="ndarja7">
+    <div class="section-title">Ndarja 7</div>
+    <h2>Kjo ndarje është në proces!</h2>
+    <div class="books"></div>
+</section>
+
+<section class="section" id="ndarja8">
+    <div class="section-title">Ndarja 8</div>
+    <h2>Kjo ndarje ka përfunduar! Në total janë regjistruar në këtë ndarje 41 libra.</h2>
+    <div class="books">
+        <div class="book"><h3>Gjuha Shqipe 2</h3><p>Zana Karapici/ Ana Toma</p></div>
+        <div class="book"><h3>Hyrja e pranveres</h3><p>Vasil Tabaku</p></div>
+        <div class="book"><h3>Proverba dhe fjale te urta</h3><p>Miltiadh Bode</p></div>
+        <div class="book"><h3>Gramatike Italiane</h3><p>G. Battaglia</p></div>
+        <div class="book"><h3>Pinoku</h3><p>Karlo Kolodi</p></div>
+        <div class="book"><h3>Amvisa e mire</h3><p>Miltiadh Bode</p></div>
+        <div class="book"><h3>Gjon Pagezori</h3><p>Kerin Mekenzi</p></div>
+        <div class="book"><h3>Thike pas shpine</h3><p>Odhise Grillo</p></div>
+        <div class="book"><h3>Italcable</h3><p>?</p></div>
+        <div class="book"><h3>Panarome letrare</h3><p>Odhise Grillo</p></div>
+        <div class="book"><h3>Takim me njerez te mire</h3><p>Fatmir Dibra</p></div>
+        <div class="book"><h3>Fabula; La Fonten</h3><p>A. Z. Cajupi</p></div>
+        <div class="book"><h3>Bourky a duhy</h3><p>FR. Borovy</p></div>
+        <div class="book"><h3>Enderrime letrare</h3><p>Loredana Manaj</p></div>
+        <div class="book"><h3>Nje jete me sportin per sportin</h3><p>Mustafa Celkupa</p></div>
+        <div class="book"><h3>Rumanishtja pa mesues</h3><p>Xhevahir Lleshi</p></div>
+        <div class="book"><h3>Gjurme</h3><p>Pandeli Cina</p></div>
+        <div class="book"><h3>Origjina e familjes, prones private dhe shtetit</h3><p>Friedrich Engels</p></div>
+        <div class="book"><h3>Basne</h3><p>Jiri Wolker</p></div>
+        <div class="book"><h3>Prirucnik</h3><p>?</p></div>
+        <div class="book"><h3>Jarmila Glazarova</h3><p>Vlci Jama</p></div>
+        <div class="book"><h3>Fatosi i Mesolongjiti</h3><p>Koci Xoxi</p></div>
+        <div class="book"><h3>Keshtjella e virtytit</h3><p>Shaban Sinani</p></div>
+        <div class="book"><h3>Perralla Satirike Ruse</h3><p>Miltiadh Bode</p></div>
+        <div class="book"><h3>Masha dhe Ariu</h3><p>Miltiadh Bode</p></div>
+        <div class="book"><h3>Hyrje ne ekonomi</h3><p>Servete Gruda, Enrieta Kallushi, Luljeta Minxhozi, Raimonda Duka, Albana Hashorva</p></div>
+        <div class="book"><h3>Praha Mesto Umeleckych Pamatek</h3><p>Jakub Pavel</p></div>
+        <div class="book"><h3>Bijte e qytetit te Durresit</h3><p>Abedin Cetaku</p></div>
+        <div class="book"><h3>Suli e Suliotet | Gjinekologjia e familjes Tasho ne pese breza</h3><p>Anesti Tasho</p></div>
+        <div class="book"><h3>Nje shtet i vogel</h3><p>Anesti Tasho</p></div>
+        <div class="book"><h3>Gjurme</h3><p>Pandeli Cina</p></div>
+        <div class="book"><h3>Poezi e shkrime te Odhise Grillos</h3><p>Odhise Grillo</p></div>
+        <div class="book"><h3>Ceshtja Shqiptare dje dhe sot</h3><p>Trim Gjata</p></div>
+        <div class="book"><h3>Trendafilat e kuq te vjeshtes</h3><p>Anesti Bukuroshi</p></div>
+        <div class="book"><h3>Pervijime te profilit Evropian ne traditen e shkolles Shqiptare</h3><p>V. Islami</p></div>
+        <div class="book"><h3>Ballkani i trazuar dhe Shqiptaret</h3><p>Pandeli Cina</p></div>
+        <div class="book"><h3>Poezi te zgjedhura</h3><p>Wistawa Szymborska</p></div>
+        <div class="book"><h3>Legjislacioni per arsimin</h3><p>Vedat Islami</p></div>
+        <div class="book"><h3>Njeriu dhe vepra | Shkrime per Mihal Hanxharin</h3><p>Zef Rakacolli, Pandora Dedja, Vita Adami</p></div>
+        <div class="book"><h3>Duke degjuar heshtjen</h3><p>Mihal Hanxhari</p></div>
+        <div class="book"><h3>English Practical Course 1</h3><p>Diana Kristo - Sonja Luarasi</p></div>
+        <div class="book"><h3>Fjalor Italisht - Gjermanisht/ Gjermanisht - Italisht</h3><p>?</p></div>
+    </div>
+</section>
+
+<!-- =========================
+VENDODHJA
+========================= -->
+
+<section class="section" id="vendodhja">
+
+    <div class="section-title">
+        Vendodhja e çdo ndarjeje
+    </div>
+
+    <div class="location-container">
+
+        <!-- VENDOS FOTON TENDE -->
+
+        <img src="ChatGPT Image Jun 22, 2026, 12_58_48 PM" alt="Vendodhja e ndarjeve">
+
+    </div>
+
+</section>
+
+<section class="section" id="kontakt">
+
+    <div class="section-title">
+        📞 Na Kontakto
+    </div>
+
+    <div class="books">
+
+        <div class="book">
+            <h3>📧 Email</h3>
+            <p>thesmartprogrammer591@gmail.com</p>
+            <p>thsp591@outlook.com</p>
+        </div>
+        <div class="book">
+            <h3>Website</h3>
+            <p>https://thsp591.wixsite.com/thsp</p>
+            <p>https://gertlula.github.io/portofolio/</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+SHOW SECTIONS
+========================= */
+
+function showSection(id){
+
+    let sections = document.querySelectorAll(".section");
+
+    sections.forEach(section=>{
+        section.classList.remove("active");
+    });
+
+    document.getElementById(id).classList.add("active");
+}
+
+/* =========================
+SEARCH BAR
+========================= */
+
+const searchInput = document.getElementById("searchInput");
+
+searchInput.addEventListener("keyup", function(){
+
+    let filter = searchInput.value.toLowerCase();
+
+    let books = document.querySelectorAll(".book");
+
+    books.forEach(book=>{
+
+        let text = book.innerText.toLowerCase();
+
+        if(text.includes(filter)){
+            book.style.display = "block";
+        }
+        else{
+            book.style.display = "none";
+        }
+
+    });
+
+});
+
+</script>
+
+</body>
+</html>
